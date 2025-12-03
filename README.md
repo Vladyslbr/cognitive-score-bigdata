@@ -57,14 +57,14 @@ for more details see: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USE
 
 ### Others
 
-**.env file must contain**
-DB_HOST= #db_endpoint
-DB_NAME=cpms_user_db
-DB_USER=dbadmin
-DB_PASS=
-SSL_MODE=require
-INGEST_URL= #api_url
-PREDICT_URL= #prediction_url
+**.env file must contain:**
+- DB_HOST= #db_endpoint
+- DB_NAME=cpms_user_db
+- DB_USER=dbadmin
+- DB_PASS=
+- SSL_MODE=require
+- INGEST_URL= #api_url
+- PREDICT_URL= #prediction_url
 
 To all the necessary data  use 'terraform output'
 
