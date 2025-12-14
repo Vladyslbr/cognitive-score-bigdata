@@ -1,0 +1,456 @@
+/* ===========================================
+   CPMS Design System - Figma-based Tokens
+   =========================================== */
+
+:root {
+  /* Primary Colors */
+  --color-primary-black: #0a0a0a;
+  --color-primary-dark: #1a1a1a;
+
+  /* Purple Accent Colors */
+  --color-purple-600: #7c3aed;
+  --color-purple-500: #8b5cf6;
+  --color-purple-400: #a78bfa;
+  --color-purple-200: #ddd6fe;
+  --color-purple-100: #ede9fe;
+
+  /* Success/Status Colors */
+  --color-success: #22c55e;
+  --color-success-light: #dcfce7;
+  --color-danger: #ef4444;
+  --color-danger-light: #fee2e2;
+
+  /* Neutral Colors */
+  --color-white: #ffffff;
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Border Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+/* ===========================================
+   Base Styles
+   =========================================== */
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--color-gray-50);
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ===========================================
+   Custom Slider Styles (Purple Theme)
+   =========================================== */
+
+input[type="range"].figma-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to right, var(--color-purple-500) 0%, var(--color-purple-500) var(--progress, 50%), var(--color-purple-200) var(--progress, 50%), var(--color-purple-200) 100%);
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"].figma-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-purple-600);
+  cursor: pointer;
+  border: 2px solid var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+input[type="range"].figma-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--color-purple-600);
+  cursor: pointer;
+  border: 2px solid var(--color-white);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ===========================================
+   Form Input Styles
+   =========================================== */
+
+.figma-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  color: var(--color-gray-700);
+  background: var(--color-white);
+  box-sizing: border-box;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.figma-input:focus {
+  outline: none;
+  border-color: var(--color-purple-400);
+  box-shadow: 0 0 0 3px var(--color-purple-100);
+}
+
+.figma-input::placeholder {
+  color: var(--color-gray-400);
+}
+
+.figma-select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  font-size: 14px;
+  font-family: var(--font-sans);
+  color: var(--color-gray-700);
+  background: var(--color-white);
+  box-sizing: border-box;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%236b7280' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 36px;
+}
+
+.figma-select:focus {
+  outline: none;
+  border-color: var(--color-purple-400);
+  box-shadow: 0 0 0 3px var(--color-purple-100);
+}
+
+/* ===========================================
+   Button Styles
+   =========================================== */
+
+.figma-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--color-primary-black);
+  color: var(--color-white);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.figma-btn-primary:hover {
+  background-color: var(--color-gray-800);
+}
+
+.figma-btn-primary:active {
+  transform: scale(0.98);
+}
+
+.figma-btn-primary:disabled {
+  background-color: var(--color-gray-400);
+  cursor: not-allowed;
+}
+
+.figma-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background-color: var(--color-white);
+  color: var(--color-gray-700);
+  font-size: 14px;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.figma-btn-secondary:hover {
+  background-color: var(--color-gray-50);
+}
+
+/* ===========================================
+   Card Styles
+   =========================================== */
+
+.figma-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+}
+
+.figma-card-bordered {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--color-purple-200);
+  padding: var(--spacing-lg);
+}
+
+/* ===========================================
+   KPI Card Styles (Dashboard)
+   =========================================== */
+
+.figma-kpi-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.figma-kpi-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-purple-600);
+}
+
+.figma-kpi-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-gray-600);
+}
+
+.figma-kpi-value {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  line-height: 1;
+}
+
+/* ===========================================
+   Table Styles (Dashboard)
+   =========================================== */
+
+.figma-table-container {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+
+.figma-table-header {
+  background: var(--color-purple-500);
+  color: var(--color-white);
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.figma-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.figma-table th {
+  background: var(--color-gray-100);
+  padding: var(--spacing-md) var(--spacing-lg);
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-gray-700);
+  border-bottom: 1px solid var(--color-gray-200);
+}
+
+.figma-table td {
+  padding: var(--spacing-md) var(--spacing-lg);
+  font-size: 14px;
+  color: var(--color-gray-700);
+  border-bottom: 1px solid var(--color-gray-100);
+}
+
+.figma-table tbody tr:hover {
+  background: var(--color-gray-50);
+}
+
+/* ===========================================
+   Dashboard Header Styles
+   =========================================== */
+
+.figma-dashboard-header {
+  background: var(--color-primary-black);
+  color: var(--color-white);
+  padding: var(--spacing-xl) var(--spacing-2xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.figma-dashboard-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+/* ===========================================
+   Worker Mobile Header
+   =========================================== */
+
+.figma-worker-header {
+  background: var(--color-primary-black);
+  padding: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.figma-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-white);
+}
+
+.figma-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  background: var(--color-white);
+  color: var(--color-gray-800);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+}
+
+/* ===========================================
+   Metric Cards (Worker View)
+   =========================================== */
+
+.figma-metric-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.figma-metric-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--color-gray-600);
+}
+
+.figma-metric-value {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--color-gray-900);
+}
+
+/* ===========================================
+   Score Cards (Worker View)
+   =========================================== */
+
+.figma-score-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--spacing-lg);
+}
+
+.figma-score-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-gray-800);
+  margin-bottom: var(--spacing-sm);
+}
+
+.figma-score-value {
+  font-size: 32px;
+  font-weight: 700;
+}
+
+.figma-score-value.success {
+  color: var(--color-success);
+}
+
+.figma-score-value.danger {
+  color: var(--color-danger);
+}
+
+/* ===========================================
+   Form Container (Worker View)
+   =========================================== */
+
+.figma-form-container {
+  background: var(--color-white);
+  border-radius: var(--radius-xl);
+  border: 2px solid var(--color-purple-200);
+  padding: var(--spacing-xl);
+}
+
+.figma-form-title {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-gray-800);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
+}
+
+.figma-form-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-gray-800);
+  margin-bottom: var(--spacing-sm);
+  display: block;
+}
+
+.figma-form-group {
+  margin-bottom: var(--spacing-lg);
+}
