@@ -121,6 +121,14 @@ resource "aws_iam_policy" "fargate_policy" {
         Action = ["dynamodb:Query", "dynamodb:GetItem"],
         Effect = "Allow",
         Resource = aws_dynamodb_table.aggregates.arn
+      },
+      {
+        Action = ["s3:PutObject", "s3:GetObject", "s3:ListBucket"],
+        Effect = "Allow",
+        Resource = [
+             "${aws_s3_bucket.data_lake.arn}/*",
+             "${aws_s3_bucket.models.arn}/*"
+        ]
       }
     ]
   })
@@ -147,7 +155,8 @@ resource "aws_ecs_task_definition" "backend_task" {
       { name = "SAGEMAKER_ENDPOINT", value = aws_sagemaker_endpoint.endpoint.name },
       { name = "DYNAMO_TABLE", value = aws_dynamodb_table.aggregates.name },
       { name = "DB_HOST", value = aws_db_instance.user_db.address },
-      { name = "DB_PASS", value = random_password.db_password.result }
+      { name = "DB_PASS", value = random_password.db_password.result },
+      { name = "MODELS_BUCKET_NAME", value = aws_s3_bucket.models.bucket }
     ]
     logConfiguration = {
         logDriver = "awslogs"

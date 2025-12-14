@@ -19,3 +19,8 @@ output "db_password_ssm" {
   value = aws_ssm_parameter.db_password_param.name
   description = "Retrieve password using: aws ssm get-parameter --name ... --with-decryption"
 }
+
+
+output "s3_bucket_models" {
+  value = aws_s3_bucket.models.bucket
+}
