@@ -1,0 +1,87 @@
+{
+  "Comment": "Monthly retrain (custom training image) and update SageMaker endpoint to latest model artifact",
+  "StartAt": "TrainSync",
+  "States": {
+    "TrainSync": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sagemaker:createTrainingJob.sync",
+      "Parameters": {
+        "TrainingJobName.$": "States.Format('${training_job_prefix}-{}', $$.Execution.Name)",
+        "RoleArn": "${sagemaker_execution_role_arn}",
+        "AlgorithmSpecification": {
+          "TrainingImage": "${training_image_uri}",
+          "TrainingInputMode": "File"
+        },
+        "InputDataConfig": [
+          {
+            "ChannelName": "train",
+            "DataSource": {
+              "S3DataSource": {
+                "S3DataType": "S3Prefix",
+                "S3Uri": "s3://${bucket_name}/train/",
+                "S3DataDistributionType": "FullyReplicated"
+              }
+            },
+            "ContentType": "application/json"
+          }
+        ],
+        "OutputDataConfig": {
+          "S3OutputPath": "s3://${bucket_name}/models/"
+        },
+        "ResourceConfig": {
+          "InstanceCount": 1,
+          "InstanceType": "ml.m5.large",
+          "VolumeSizeInGB": 10
+        },
+        "StoppingCondition": {
+          "MaxRuntimeInSeconds": 3600
+        }
+      },
+      "ResultPath": "$.train_desc",
+      "Next": "CreateModel"
+    },
+
+    "CreateModel": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sagemaker:createModel",
+      "Parameters": {
+        "ModelName.$": "States.Format('${model_prefix}-{}', $$.Execution.Name)",
+        "ExecutionRoleArn": "${sagemaker_execution_role_arn}",
+        "PrimaryContainer": {
+          "Image": "${inference_image_uri}",
+          "ModelDataUrl.$": "$.train_desc.ModelArtifacts.S3ModelArtifacts"
+        }
+      },
+      "ResultPath": "$.create_model",
+      "Next": "CreateEndpointConfig"
+    },
+
+    "CreateEndpointConfig": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sagemaker:createEndpointConfig",
+      "Parameters": {
+        "EndpointConfigName.$": "States.Format('${endpoint_config_prefix}-{}', $$.Execution.Name)",
+        "ProductionVariants": [
+          {
+            "VariantName": "AllTraffic",
+            "ModelName.$": "States.Format('${model_prefix}-{}', $$.Execution.Name)",
+            "InitialInstanceCount": 1,
+            "InstanceType": "${endpoint_instance_type}"
+          }
+        ]
+      },
+      "ResultPath": "$.create_epc",
+      "Next": "UpdateEndpoint"
+    },
+
+    "UpdateEndpoint": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sagemaker:updateEndpoint",
+      "Parameters": {
+        "EndpointName": "${endpoint_name}",
+        "EndpointConfigName.$": "States.Format('${endpoint_config_prefix}-{}', $$.Execution.Name)"
+      },
+      "End": true
+    }
+  }
+}
